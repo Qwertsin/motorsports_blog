@@ -4,7 +4,7 @@ import datetime
 from django.http import HttpResponse
 
 
-def index(request):
+def index(request):     # pylint: disable=unused-argument
+    """Return the homepage response."""
     now = datetime.datetime.now()
-    # Return the home page response.
     return HttpResponse(f"Hello world! The current date and time is: {now}")
