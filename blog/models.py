@@ -1,6 +1,20 @@
 from django.conf import settings
 from django.db import models
 
+class Topic(models.Model):
+    name = models.CharField(
+        max_length=50,
+        unique=True  # No duplicates!
+    )
+    slug = models.SlugField(unique=True)
+
+    def __str__(self):
+        return self.name
+
+
+    class Meta:
+        ordering = ['name']
+
 
 class Post(models.Model):
     """
@@ -18,6 +32,12 @@ class Post(models.Model):
         null=False,
         unique_for_date='published',
     )
+
+    topics = models.ManyToManyField(
+        Topic,
+        related_name='blog_posts'
+    )
+
     author = models.ForeignKey(
         settings.AUTH_USER_MODEL,  # The Django auth user model
         on_delete=models.PROTECT,  # Prevent posts from being deleted
