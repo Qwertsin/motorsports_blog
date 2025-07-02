@@ -1,6 +1,7 @@
 from django.conf import settings
 from django.db import models
 
+
 class Topic(models.Model):
     name = models.CharField(
         max_length=50,
@@ -10,7 +11,6 @@ class Topic(models.Model):
 
     def __str__(self):
         return self.name
-
 
     class Meta:
         ordering = ['name']
@@ -64,3 +64,49 @@ class Post(models.Model):
 
     def __str__(self):
         return self.title
+
+
+class Comment(models.Model):
+    # Many comments to one unique post therefore ForeignKey
+
+    post = models.ForeignKey(
+        Post,
+        on_delete=models.CASCADE,  # Cascade deletes all comments when related posted is deleted
+        related_name='comments',    # As per part 2
+        null=False,  # Makes sure that each comment is linked to a post
+    )
+
+    # The name of the person making the comment
+    name = models.CharField(
+        max_length=50,
+        null=False  # required field
+    )
+
+    # The email address for the commenter
+    email = models.EmailField(
+        null= False # required field
+    )
+
+    # Text containing the actual comment
+    text = models.TextField(
+        max_length=500,
+        null=False  # required field
+    )
+
+    # A boolean field which is intended for comment moderation
+    approved = models.BooleanField(
+        default=False   # Comments are hidden by default until approved
+    )
+
+    # A timestamp which is automatically set only on create
+    created = models.DateTimeField(auto_now_add=True)  # Sets on create
+
+    # A timestamp which updates each time the object is saved
+    updated = models.DateTimeField(auto_now=True)  # Updates on each save
+
+    #Order Comments sorted by the created timestamp in reverse chronological order
+    class Meta:
+        ordering = ['-created']
+
+    def __str__(self):
+        return f'{self.name}: {self.text[:30]}'
