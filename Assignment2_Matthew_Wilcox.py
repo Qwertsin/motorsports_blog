@@ -1,3 +1,8 @@
+"""
+Django ORM query functions for Assignment 2.
+"""
+
+
 from django.contrib.auth import get_user_model
 from django.db.models import Sum, Q, Count
 
