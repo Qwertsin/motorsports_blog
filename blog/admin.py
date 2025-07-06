@@ -1,17 +1,24 @@
+"""
+Django admin configuration for the blog app.
+Registers Post, Topic, and Comment models with custom admin settings.
+"""
+
 from django.contrib import admin
 from . import models
 
-# Register your models here.
 
 # tabular chosen due to models being short and compact
 class CommentInLine(admin.TabularInline):
+    """Inline admin configuration for Comment model on the Post detail page."""
     model = models.Comment
     extra = 0  # Do not show blank rows
     fields = ('name', 'email', 'text', 'approved')  # Show only these
     readonly_fields = ('name', 'email', 'text')  # These fields are read-only
 
+
 @admin.register(models.Post)
 class PostAdmin(admin.ModelAdmin):
+    """Admin configuration for the Post model."""
     list_display = (
         'title',
         'author',
@@ -33,10 +40,12 @@ class PostAdmin(admin.ModelAdmin):
     )
 
     prepopulated_fields = {'slug': ('title',)}
-    inlines = [CommentInLine]   # Connects CommentInLine to PostAdmin
+    inlines = [CommentInLine]  # Connects CommentInLine to PostAdmin
+
 
 @admin.register(models.Topic)
 class TopicAdmin(admin.ModelAdmin):
+    """Admin configuration for the Topic model."""
     list_display = (
         'name',
         'slug',
@@ -46,6 +55,7 @@ class TopicAdmin(admin.ModelAdmin):
 
 @admin.register(models.Comment)
 class CommentAdmin(admin.ModelAdmin):
+    """Admin configuration for the Comment model."""
     list_display = (
         'name',
         'email',
@@ -63,4 +73,3 @@ class CommentAdmin(admin.ModelAdmin):
     list_filter = (
         'approved',
     )
-

@@ -67,6 +67,9 @@ class Post(models.Model):
 
 
 class Comment(models.Model):
+    """
+    Represents a comment left by a user on a blog post.
+    """
     # Many comments to one unique post therefore ForeignKey
 
     post = models.ForeignKey(
@@ -84,7 +87,7 @@ class Comment(models.Model):
 
     # The email address for the commenter
     email = models.EmailField(
-        null= False # required field
+        null=False  # required field
     )
 
     # Text containing the actual comment
