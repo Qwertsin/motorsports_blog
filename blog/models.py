@@ -1,5 +1,14 @@
 from django.conf import settings
 from django.db import models
+from django.utils import timezone
+
+
+class PostQuerySet(models.QuerySet):
+    def published(self):
+        return self.filter(status=self.model.PUBLISHED)
+
+    def drafts(self):
+        return self.filter(status=self.model.DRAFT)
 
 
 class Topic(models.Model):
@@ -56,11 +65,24 @@ class Post(models.Model):
         blank=True,
         help_text='The date & time this article was published'
     )
+
+    objects = PostQuerySet.as_manager()
+
+    slug = models.SlugField(
+        null=False,
+        help_text='The date & time this article was published',
+        unique_for_date='published',  # Slug is unique for publication date
+    )
+
     created = models.DateTimeField(auto_now_add=True)  # Sets on create
     updated = models.DateTimeField(auto_now=True)  # Updates on each save
 
     class Meta:
         ordering = ['-created']
+
+    def publish(self):
+        self.status = self.PUBLISHED
+        self.published = timezone.now()
 
     def __str__(self):
         return self.title

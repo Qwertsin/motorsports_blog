@@ -16,9 +16,10 @@ Including another URLconf
 """
 from django.contrib import admin
 from django.urls import path
-from . import views  # ← import the new views.py file
+
+from blog import views  # Import the blog views
 
 urlpatterns = [
     path('admin/', admin.site.urls),
-    path('', views.index),  # ← root URL shows your view
+    path('', views.home, name='home'),  # Set root to home view
 ]
