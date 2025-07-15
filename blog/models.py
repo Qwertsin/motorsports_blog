@@ -1,3 +1,5 @@
+"""Models for the blog application."""
+
 from django.conf import settings
 from django.db import models
 from django.utils import timezone
@@ -12,6 +14,7 @@ class PostQuerySet(models.QuerySet):
 
 
 class Topic(models.Model):
+    """Represents a blog topic"""
     name = models.CharField(
         max_length=50,
         unique=True  # No duplicates!
@@ -37,9 +40,11 @@ class Post(models.Model):
     ]
 
     title = models.CharField(max_length=255)
+
     slug = models.SlugField(
         null=False,
-        unique_for_date='published',
+        help_text='The date & time this article was published',
+        unique_for_date='published',  # Slug is unique for publication date
     )
 
     topics = models.ManyToManyField(
@@ -68,11 +73,6 @@ class Post(models.Model):
 
     objects = PostQuerySet.as_manager()
 
-    slug = models.SlugField(
-        null=False,
-        help_text='The date & time this article was published',
-        unique_for_date='published',  # Slug is unique for publication date
-    )
 
     created = models.DateTimeField(auto_now_add=True)  # Sets on create
     updated = models.DateTimeField(auto_now=True)  # Updates on each save
@@ -81,6 +81,7 @@ class Post(models.Model):
         ordering = ['-created']
 
     def publish(self):
+        """Post as published and set timestamp."""
         self.status = self.PUBLISHED
         self.published = timezone.now()
 

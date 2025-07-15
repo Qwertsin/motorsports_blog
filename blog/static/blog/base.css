@@ -12,6 +12,13 @@ body {
   max-width: 1000px;  /* Set max width */
   min-height: 100%;  /* Full height */
   padding: 1rem;
+
+
+  background-image: url("checkered-flag.jpg");
+  background-repeat: repeat;
+  background-size: 500px 500px;
+  background-attachment: fixed;
+
 }
 
 /*
@@ -28,9 +35,31 @@ a:hover {
 }
 
 /* Style the header area */
+#site-header {
+  background-color: rgba(255, 255, 255, 0.97);
+  padding: 1rem;
+  border-radius: 6px;
+  box-shadow: 0 2px 6px rgba(0, 0, 0, 0.1);
+}
+
 #site-header h1 {
-  padding: 0;
+  font-size: 2.5rem;
+  font-weight: 900;
+  color: #c40000;
+  text-transform: uppercase;
+  letter-spacing: 1px;
   margin: 0;
+  padding: 0;
+}
+
+#site-header h1 a {
+  color: #c40000; /* bold racing red */
+  text-decoration: none;
+}
+
+#site-header h1 a:hover {
+  color: #900; /* darker red on hover */
+  text-decoration: underline;
 }
 
 #site-header p {
@@ -40,10 +69,25 @@ a:hover {
   margin: 0;
 }
 
+/* Banner image below header */
+#banner-image {
+  width: 100%;
+  height: auto;
+  display: block;
+  margin: 1rem 0;
+  border-radius: 6px;
+  object-fit: contain;
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.25);
+  background: white;
+}
+
 /* Style the top nav */
 #top-nav {
-  padding: 0.5rem 0;
-  border-bottom: 1px solid #eee;
+  background-color: rgba(255, 255, 255, 0.95);
+  padding: 0.5rem 1rem;
+  border-radius: 4px;
+  box-shadow: 0 1px 4px rgba(0, 0, 0, 0.05);
+  margin-top: 0.5rem;
 }
 
 #top-nav ul {
@@ -61,6 +105,9 @@ a:hover {
 #top-nav a {
   text-decoration: none;
   font-weight: bold;
+  font-size: 1.2rem;
+  letter-spacing: 0.5px;
+  text-transform: uppercase;
 }
 
 /* Style the main content */
@@ -73,13 +120,18 @@ a:hover {
 
 #main-content aside {
   flex: 1;
-  background-color: #f4f4f4;
+  background-color: rgba(255, 255, 255, 0.92);
   padding: 1rem;
-  border-radius: 5px;
+  border-radius: 6px;
+  box-shadow: 0 0 8px rgba(0, 0, 0, 0.1);
 }
 
 #main-content section {
   flex: 3;
+  background-color: rgba(255, 255, 255, 0.95);
+  padding: 1rem;
+  border-radius: 6px;
+  box-shadow: 0 0 12px rgba(0, 0, 0, 0.2);
 }
 
 /* Style the footer */

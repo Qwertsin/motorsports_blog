@@ -17,6 +17,9 @@
     <p>A blog about racing, cars, and motorsport stories</p>
   </header>
 
+  <img src="{% static 'blog/IMSA.jpg' %}" alt="Motorsports Banner" id="banner-image">
+
+
   <!-- Navigation -->
   <nav id="top-nav">
     <ul>
@@ -29,6 +32,12 @@
 
   <!-- Main layout: sidebar + page content -->
   <main id="main-content">
+    <section>
+      {% block main %}
+      <!-- Page-specific content will render here -->
+      {% endblock %}
+    </section>
+
 
     <aside>
       <h3>Popular Topics</h3>
@@ -41,11 +50,7 @@
       </ul>
     </aside>
 
-    <section>
-      {% block main %}
-      <!-- Page-specific content will render here -->
-      {% endblock %}
-    </section>
+
 
   </main>
 
