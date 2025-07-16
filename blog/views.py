@@ -10,12 +10,12 @@ def home(request):
     """
     Homepage view showing recent posts and a sidebar of top topics.
     """
-    latest_posts = models.Post.objects.published().order_by('-published')
+    latest_posts = models.Post.objects.published().order_by('-published')   # Get latest published posts
 
     # Get top 10 topics by number of related posts
     top_topics = models.Topic.objects.annotate(
         post_count=Count('blog_posts')
-    ).order_by('-post_count')[:10]
+    ).order_by('-post_count')[:10]  # Top 10 topics by number of posts
 
     context = {
         'latest_posts': latest_posts,

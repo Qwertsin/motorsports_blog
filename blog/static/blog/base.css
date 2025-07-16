@@ -14,10 +14,10 @@ body {
   padding: 1rem;
 
 
-  background-image: url("checkered-flag.jpg");
+  background-image: url("checkered-flag.jpg"); /* Use image as background */
   background-repeat: repeat;
   background-size: 500px 500px;
-  background-attachment: fixed;
+  background-attachment: fixed; /* background doesn't move when scrolling */
 
 }
 
@@ -53,7 +53,7 @@ a:hover {
 }
 
 #site-header h1 a {
-  color: #c40000; /* bold racing red */
+  color: #c40000; /* bold red */
   text-decoration: none;
 }
 
