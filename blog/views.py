@@ -1,25 +1,53 @@
 """Views for the blog application."""
 
 from django.shortcuts import render
-from django.db.models import Count
+from django.views.generic.base import TemplateView
+from django.views.generic import ListView
+from django.views.generic import DetailView
 
 from . import models
 
+class HomeView(TemplateView):
+    template_name = 'blog/home.html'
 
-def home(request):
-    """
-    Homepage view showing recent posts and a sidebar of top topics.
-    """
-    latest_posts = models.Post.objects.published().order_by('-published')   # Get latest published posts
+    def get_context_data(self, **kwargs):
+        # Get the parent context
+        context = super().get_context_data(**kwargs)
 
-    # Get top 10 topics by number of related posts
-    top_topics = models.Topic.objects.annotate(
-        post_count=Count('blog_posts')
-    ).order_by('-post_count')[:10]  # Top 10 topics by number of posts
+        latest_posts = models.Post.objects.published() \
+            .order_by('-published')[:3]
 
-    context = {
-        'latest_posts': latest_posts,
-        'top_topics': top_topics
-    }
+        context.update({
+            'latest_posts': latest_posts
+        })
 
-    return render(request, 'blog/home.html', context)
+        return context
+
+class AboutView(TemplateView):
+    template_name = 'blog/about.html'
+
+
+def terms_and_conditions(request):
+   return render(request, 'blog/terms_and_conditions.html')
+
+class PostListView(ListView):
+    model = models.Post
+    context_object_name = 'posts'
+    queryset = models.Post.objects.published().order_by('-published')
+
+class PostDetailView(DetailView):
+    model = models.Post
+
+    def get_queryset(self):
+        queryset = super().get_queryset().published()
+
+        # If this is a `pk` lookup, use default queryset
+        if 'pk' in self.kwargs:
+            return queryset
+
+        # Otherwise, filter on the published date
+        return queryset.filter(
+            published__year=self.kwargs['year'],
+            published__month=self.kwargs['month'],
+            published__day=self.kwargs['day'],
+        )

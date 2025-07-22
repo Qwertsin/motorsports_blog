@@ -73,12 +73,12 @@ a:hover {
 #banner-image {
   width: 100%;
   height: auto;
+  max-height: 500px;
+  object-fit: cover;
   display: block;
-  margin: 1rem 0;
+  margin-top: 1rem;
   border-radius: 6px;
-  object-fit: contain;
   box-shadow: 0 4px 12px rgba(0, 0, 0, 0.25);
-  background: white;
 }
 
 /* Style the top nav */
@@ -96,10 +96,9 @@ a:hover {
 }
 
 #top-nav li {
-  margin-top: 1rem;
   list-style-type: none;
   display: inline-block;
-  padding-right: 1rem;
+  padding: 0 1rem;
 }
 
 #top-nav a {
@@ -113,6 +112,7 @@ a:hover {
 /* Style the main content */
 #main-content {
   display: flex;
+  align-items: stretch;
   gap: 2rem;
   margin-top: 1rem;
   margin-bottom: 2rem;
@@ -137,4 +137,43 @@ a:hover {
 /* Style the footer */
 #site-footer {
   font-size: 0.9rem;
+}
+
+/* Post preview */
+.post-preview {
+  border-bottom: 1px #eee solid;
+}
+.post-preview h2 {
+  padding-bottom: 0;
+  margin-bottom: 0;
+}
+
+.post-preview time {
+  color: #999;
+}
+
+.post-preview section {
+  margin: 1rem 0;
+}
+
+
+/* Post detail article */
+#post-detail-article h1 {
+  margin-bottom: 0;
+  padding-bottom: 0;
+}
+
+#post-detail-article .author {
+  font-size: 0.9rem;
+  font-weight: bold;
+  color: #555;
+}
+
+#post-detail-article .published {
+  color: #999;
+  font-size: 0.9rem;
+}
+
+#post-detail-article .content {
+  margin: 2rem 0;
 }

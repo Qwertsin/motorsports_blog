@@ -3,6 +3,8 @@
 from django.conf import settings
 from django.db import models
 from django.utils import timezone
+from django.contrib.auth import get_user_model
+from django.urls import reverse
 
 
 class PostQuerySet(models.QuerySet):
@@ -11,6 +13,10 @@ class PostQuerySet(models.QuerySet):
 
     def drafts(self):
         return self.filter(status=self.model.DRAFT)
+
+    def get_authors(self):
+        User = get_user_model()
+        return User.objects.filter(blog_posts__in=self).distinct()
 
 
 class Topic(models.Model):
@@ -76,6 +82,19 @@ class Post(models.Model):
 
     created = models.DateTimeField(auto_now_add=True)  # Sets on create
     updated = models.DateTimeField(auto_now=True)  # Updates on each save
+
+    def get_absolute_url(self):
+        if self.published:
+            kwargs = {
+                'year': self.published.year,
+                'month': self.published.month,
+                'day': self.published.day,
+                'slug': self.slug
+            }
+        else:
+            kwargs = {'pk': self.pk}
+
+        return reverse('post-detail', kwargs=kwargs)
 
     class Meta:
         ordering = ['-created']
