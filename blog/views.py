@@ -51,3 +51,22 @@ class PostDetailView(DetailView):
             published__month=self.kwargs['month'],
             published__day=self.kwargs['day'],
         )
+
+class TopicListView(ListView):
+    model = models.Topic
+    context_object_name = 'topics'
+
+class TopicDetailView(DetailView):
+    model = models.Topic
+    context_object_name = 'topic'
+
+    def get_context_data(self, **kwargs):
+        context = super().get_context_data(**kwargs)
+        topic = self.get_object()
+
+        posts = topic.blog_posts.filter(
+            status=models.Post.PUBLISHED
+        ).order_by('-published')
+
+        context['posts'] = posts
+        return context

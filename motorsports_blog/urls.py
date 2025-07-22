@@ -35,4 +35,5 @@ urlpatterns = [
         views.PostDetailView.as_view(),
         name='post-detail'
     ),
+    path('topics/', views.TopicListView.as_view(), name='topic-list'),
 ]
