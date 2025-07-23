@@ -134,6 +134,19 @@ a:hover {
   box-shadow: 0 0 12px rgba(0, 0, 0, 0.2);
 }
 
+/* Style the Sidebar topic list */
+
+.topic-list li {
+  margin-bottom: 6px;
+  line-height: 1.4;
+}
+
+.topic-list .post-count {
+  color: #666;
+  font-size: 0.9rem;
+  margin-left: 4px;
+}
+
 /* Style the footer */
 #site-footer {
   font-size: 0.9rem;
@@ -158,6 +171,7 @@ a:hover {
 
 
 /* Post detail article */
+
 #post-detail-article h1 {
   margin-bottom: 0;
   padding-bottom: 0;
@@ -177,3 +191,16 @@ a:hover {
 #post-detail-article .content {
   margin: 2rem 0;
 }
+
+#post-detail-article .post-topics {
+  margin-top: 2rem;
+}
+
+#post-detail-article .post-topics ul {
+  padding-left: 1.2rem;
+}
+
+#post-detail-article .post-topics li {
+  margin-bottom: 4px;
+}
+

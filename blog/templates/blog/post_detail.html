@@ -1,13 +1,28 @@
+<!-- Template for displaying individual blog post details -->
+
 {% extends "blog/base.html" %}
 
 {% block page_title %}{{ post.title }}{% endblock %}
 
 {% block main %}
+
 <article id="post-detail-article">
   <h1>{{ post.title }}</h1>
   <span class="published">Published <time>{{ post.published }}</time></span><br>
   <span class="author">{{ post.author.get_full_name }}</span>
 
-  <section class="content">{{ post.content|linebreaks }}</section>
-</article>
+  <section class="post-topics">
+      <h3>Topics</h3>
+      <ul>
+        {% for topic in post.topics.all %}
+          <!-- Link topics to their detailed page on the site -->
+          <li><a href="{{ topic.get_absolute_url }}">{{ topic.name }}</a></li>
+        {% empty %}
+          <li>No topics assigned</li>
+        {% endfor %}
+      </ul>
+    </section>
+    <section class="content">{{ post.content|linebreaks }}</section>
+  </article>
+
 {% endblock %}

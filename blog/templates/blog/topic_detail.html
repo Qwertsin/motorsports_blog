@@ -1,0 +1,20 @@
+<!-- Template for the topic detail view. Displays a list of published posts
+  associated with a specific topic -->
+
+{% extends "blog/base.html" %}
+
+{% block page_title %}{{ topic.name }}{% endblock %}
+
+{% block main %}
+  <!-- Topic detail page heading -->
+  <h1>Posts about {{ topic.name }}</h1>
+
+  <!-- Render a list of posts filtered by this topic. -->
+  {% if posts %}
+    {% for post in posts %}
+      {% include "blog/post_preview.html" %}
+    {% endfor %}
+  {% else %}
+    <p>No published posts yet for this topic.</p>
+  {% endif %}
+{% endblock %}

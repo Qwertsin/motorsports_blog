@@ -1,3 +1,4 @@
+<!-- Base layout with global navigation, topics sidebar, and footer -->
 <!-- blog/templates/blog/base.html -->
 
 <!DOCTYPE html>
@@ -25,9 +26,10 @@
   <!-- Navigation -->
   <nav id="top-nav">
     <ul>
-      <li><a href="{% url "home" %}">Home</a></li>
-      <li><a href="{% url "about" %}">About</a></li>
-      <li><a href="{% url "post-list" %}">Posts</a></li>
+      <li><a href="{% url 'home' %}">Home</a></li>
+      <li><a href="{% url 'about' %}">About</a></li>
+      <li><a href="{% url 'post-list' %}">Posts</a></li>
+      <li><a href="{% url 'topic-list' %}">Topics</a></li>
       <li><a href="#">Contact</a></li>
     </ul>
   </nav>
@@ -40,16 +42,21 @@
       {% endblock %}
     </section>
 
-
+    <!-- Topics sidebar: includes link to detail view and view-all -->
     <aside>
       <h3>Popular Topics</h3>
-      <ul>
+      <ul class="topic-list">
         {% for topic in top_topics %}
-          <li>{{ topic.name }} ({{ topic.post_count }})</li>
+          <li>
+            <!-- Link topics to their detailed page on the site -->
+            <a href="{{ topic.get_absolute_url }}">{{ topic.name }}</a>
+            <span class="post-count">({{ topic.post_count }})</span>
+          </li>
         {% empty %}
           <li>No topics available</li>
         {% endfor %}
       </ul>
+      <p><a href="{% url 'topic-list' %}">View all topics</a></p>
 
       <h3>Authors</h3>
       <ul>
@@ -68,7 +75,7 @@
   <!-- Footer -->
   <footer id="site-footer">
     Copyright &copy; {% now 'Y' %} –
-    <a href="{% url "terms-and-conditions" %}">Terms & conditions</a>
+    <a href="{% url 'terms-and-conditions' %}">Terms & conditions</a>
   </footer>
 
 </body>

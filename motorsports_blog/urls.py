@@ -30,10 +30,8 @@ urlpatterns = [
         views.PostDetailView.as_view(),
         name='post-detail',
     ),
-    path(
-        'posts/<int:pk>/',
-        views.PostDetailView.as_view(),
-        name='post-detail'
-    ),
+    #Define the URL at /topics/. Note the trailing slash.
     path('topics/', views.TopicListView.as_view(), name='topic-list'),
+    #Define the URL as /topics/<slug:slug>/. Note the trailing slash.
+    path('topics/<slug:slug>/', views.TopicDetailView.as_view(), name='topic-detail'),
 ]

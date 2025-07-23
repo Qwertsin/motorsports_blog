@@ -1,8 +1,14 @@
+<!-- Template to render a single post preview, used in list and detail views -->
+
 <article class="post-preview">
-<h2>{{ post.title }}</h2>
-<time>{{ post.published }}</time>
-<section class="teaser">
-  {{ post.content|truncatewords:20 }}
-</section>
-<p><a href="{{ post.get_absolute_url }}">Read more &rarr; </a></p>
+  <h2>{{ post.title }}</h2>
+  <time>{{ post.published }}</time>
+
+  <section class="teaser">
+    {{ post.content|truncatewords:20 }}
+  </section>
+
+  <p>
+      <a href="{{ post.get_absolute_url }}">Read more &rarr; </a>
+  </p>
 </article>
