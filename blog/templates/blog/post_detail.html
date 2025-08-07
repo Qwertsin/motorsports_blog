@@ -11,6 +11,10 @@
   <span class="published">Published <time>{{ post.published }}</time></span><br>
   <span class="author">{{ post.author.get_full_name }}</span>
 
+  {% if post.banner %}
+    <img src="{{ post.banner.url }}" width="100%" alt="Banner image">
+  {% endif %}
+
   <section class="post-topics">
       <h3>Topics</h3>
       <ul>
@@ -22,7 +26,7 @@
         {% endfor %}
       </ul>
     </section>
-    <section class="content">{{ post.content|linebreaks }}</section>
+    <section class="content">{{ post.content|safe|linebreaks }}</section>
   </article>
 
 {% endblock %}

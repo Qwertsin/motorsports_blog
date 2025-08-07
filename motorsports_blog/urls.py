@@ -15,9 +15,11 @@ Including another URLconf
     2. Add a URL to urlpatterns:  path('blog/', include('blog.urls'))
 """
 from django.contrib import admin
-from django.urls import path
+from django.urls import include, path
 
 from blog import views  # Import the blog views
+from django.conf import settings
+from django.conf.urls.static import static
 
 urlpatterns = [
     path('admin/', admin.site.urls),
@@ -34,4 +36,12 @@ urlpatterns = [
     path('topics/', views.TopicListView.as_view(), name='topic-list'),
     #Define the URL as /topics/<slug:slug>/. Note the trailing slash.
     path('topics/<slug:slug>/', views.TopicDetailView.as_view(), name='topic-detail'),
-]
+    path('form-example/', views.form_example, name='form-example'),
+    path(
+        'formview-example/',
+        views.FormViewExample.as_view(),
+        name='formview-example'
+    ),
+    path('contact/', views.ContactFormView.as_view(), name='contact'),
+    path('ckeditor/', include('ckeditor_uploader.urls')),
+] + static(settings.MEDIA_URL, document_root=settings.MEDIA_ROOT)

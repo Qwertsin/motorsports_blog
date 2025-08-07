@@ -1,0 +1,15 @@
+{% extends "blog/base.html" %}
+
+{% block page_title %}Contact{% endblock %}
+
+
+{% block main %}
+
+<form method="post">
+  {% csrf_token %}
+  <table>
+    {{ form.as_table }}
+  </table>
+  <button type="submit">Submit</button>
+</form>
+{% endblock %}

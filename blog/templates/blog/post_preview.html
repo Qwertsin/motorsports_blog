@@ -5,7 +5,7 @@
   <time>{{ post.published }}</time>
 
   <section class="teaser">
-    {{ post.content|truncatewords:20 }}
+    {{ post.content|striptags|truncatewords:20 }}
   </section>
 
   <p>
