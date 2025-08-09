@@ -182,3 +182,26 @@ class Contact(models.Model):
 
     def __str__(self):
         return f'{self.submitted.date()}: {self.email}'
+
+class PhotoSubmission(models.Model):
+    """
+    Represents a model to submit photos and other info for a contest submission
+    """
+    # First name of the submitter
+    first_name = models.CharField(max_length=50)
+
+    # Last name of the submitter
+    last_name = models.CharField(max_length=50)
+
+    # Email address of the submitter
+    email = models.EmailField()
+
+    # Uploaded photo file — stored in media/contest_photos/
+    image = models.ImageField(upload_to='contest_photos/')
+
+    # Timestamp when submission was created (auto-set on create)
+    submitted_at = models.DateTimeField(auto_now_add=True)
+
+    def __str__(self):
+        # Shows full name and email in Django admin or shell
+        return f"{self.first_name} {self.last_name} ({self.email})"

@@ -80,7 +80,7 @@ class ContactAdmin(admin.ModelAdmin):
         'email',
         'last_name',
         'first_name',
-        'submitted'
+        'submitted',
     )
     # Make these fields read-only in the admin
     readonly_fields = (
@@ -88,5 +88,30 @@ class ContactAdmin(admin.ModelAdmin):
         'last_name',
         'email',
         'message',
-        'submitted'
+        'submitted',
+    )
+
+@admin.register(models.PhotoSubmission)
+class PhotoSubmissionAdmin(admin.ModelAdmin):
+    """Admin configuration for the PhotoSubmission model."""
+    # Display these fields as columns in the list view
+    list_display = (
+        'first_name',
+        'last_name',
+        'email',
+        'submitted_at',
+    )
+    # Add filter options by submission date
+    list_filter = (
+        'submitted_at',
+    )
+    # Enable search functionality by name or email
+    search_fields = (
+        'first_name',
+        'last_name',
+        'email'
+    )
+    # Show these fields as read-only in the admin detail view
+    readonly_fields = (
+        'submitted_at',
     )

@@ -20,6 +20,7 @@ from django.urls import include, path
 from blog import views  # Import the blog views
 from django.conf import settings
 from django.conf.urls.static import static
+from blog.views import PhotoContestView
 
 urlpatterns = [
     path('admin/', admin.site.urls),
@@ -44,4 +45,5 @@ urlpatterns = [
     ),
     path('contact/', views.ContactFormView.as_view(), name='contact'),
     path('ckeditor/', include('ckeditor_uploader.urls')),
+    path('photo-contest/', PhotoContestView.as_view(), name='photo-contest'),
 ] + static(settings.MEDIA_URL, document_root=settings.MEDIA_ROOT)

@@ -142,3 +142,24 @@ class ContactFormView(CreateView):
             'Thank you! Your message has been sent.'
         )
         return super().form_valid(form)
+
+
+class PhotoContestView(CreateView):
+    """
+    Handles photo contest submissions using a model-backed form.
+    """
+    model = models.PhotoSubmission
+    form_class = forms.PhotoSubmissionForm
+    template_name = 'blog/photo_contest.html'
+    success_url = reverse_lazy('photo-contest')
+
+    def form_valid(self, form):
+        """
+        Show a success message after saving the submission.
+        """
+        messages.add_message(
+            self.request,
+            messages.SUCCESS,
+            'Thank you! Your photo submission has been received.'
+        )
+        return super().form_valid(form)
